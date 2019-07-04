@@ -13,12 +13,12 @@ public class GameManager : MonoBehaviour
         {
             instancia = this;
         }
-        else if (instancia == this)
+        else
         {
-            Destroy(gameObject);
+            Destroy(this);
         }
 
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(this);
     }
     void Start()
     {
