@@ -49,9 +49,9 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// When player lost the ball
     /// </summary>
-    public void BackingPlayer()
+    public void BackingPlayer(bool status)
     {
-        Backing = true;
+        Backing = status;
     }
 
 
