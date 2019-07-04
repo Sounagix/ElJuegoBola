@@ -17,11 +17,12 @@ public class DeadBola : MonoBehaviour
     {
         player.GetComponent<PlayerController>().BackingPlayer(true);
         player.GetComponent<Backing>().ActiveBacking();
-        gameObject.SetActive(false);
+        GetComponent<Rigidbody2D>().Sleep();
     }
 
-    private void OnBecameInvisible()
+    public void StartBola()
     {
-        print("GAMEOVER");
+        transform.position = spawnPoint.position;
     }
+
 }

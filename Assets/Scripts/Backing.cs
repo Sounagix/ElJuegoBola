@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Backing : MonoBehaviour
 {
+    public GameObject bola;
     public float backingSpeed;
     private float timeToBack;
     private Vector2 posOrigen, posGoal;
@@ -29,6 +30,7 @@ public class Backing : MonoBehaviour
             backing = false;
             timeToBack = 0;
             GetComponent<PlayerController>().BackingPlayer(false);
+            bola.GetComponent<DeadBola>().StartBola();
         }
 
     }

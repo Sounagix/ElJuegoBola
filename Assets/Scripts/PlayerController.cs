@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private const int MAX = 10, MIN = 0;
+    private const int MAX = 20, MIN = 0;
     public float upSpeed, angleSpeed, maxRotation, minRotarion;
     public Vector2 startPosition { get; private set; }//posición inicial del jugador al empezar el juego
     private float xSpeed, ySpeed,diference;
