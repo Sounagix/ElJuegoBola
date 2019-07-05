@@ -20,19 +20,22 @@ public class GameManager : MonoBehaviour
 
         DontDestroyOnLoad(this);
     }
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    /// <summary>
+    /// Cambia a otra escena en función de index
+    /// </summary>
+    /// <param name="index"></param>
     public void ChangeScene(int index)
     {
         SceneManager.LoadScene(index);
     }
+
+    /// <summary>
+    /// Cierra el juego
+    /// </summary>
+    public void CloseGame()
+    {
+        Application.Quit();
+    }
+
 }
