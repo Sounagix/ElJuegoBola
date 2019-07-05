@@ -8,8 +8,11 @@ public class DispenserBehaviour : MonoBehaviour
     public GameObject closer;
     public enum direction { LEFT = -1 ,RIGHT = 1};
     public direction currDir = direction.LEFT;
-
-
+    private PlayerController playerController;
+    private void Start()
+    {
+        playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -47,5 +50,6 @@ public class DispenserBehaviour : MonoBehaviour
     {
         yield return new WaitForSecondsRealtime(timeToCloser);
         SetActiveClosers(true);
+        playerController.setCanUp(true);
     }
 }

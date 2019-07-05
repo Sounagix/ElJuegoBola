@@ -21,7 +21,7 @@ public class DeadBola : MonoBehaviour
     }
 
     /// <summary>
-    /// Eligue un spawn point aleatorio
+    /// Elige un spawn point aleatorio
     /// </summary>
     public void StartBola()
     {
@@ -30,6 +30,7 @@ public class DeadBola : MonoBehaviour
         go.SetAllCollidersEyeBull(false);
         GetComponent<StartBola>().ServingBola();
         transform.position = spawnPoints[(int)(Random.Range(0, spawnPoints.Length))].position;
+        player.GetComponent<PlayerController>().setCanUp(false);
     }
 
     public void GameOver()

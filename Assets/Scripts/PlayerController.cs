@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     public bool Backing { get; private set; }//Variable que determina si el jugador vuelve a la posición de origen
     private bool posMovement;
-
+    private bool canUp = true;
     private void Start()
     {
         startPosition = transform.position;
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour
         {
             transform.Translate(Vector2.up * upSpeed * ySpeed, Space.World);
         }
-        else if (!Backing && Mathf.Floor(transform.position.y) < MAX && ySpeed > 0) 
+        else if (!Backing && canUp && Mathf.Floor(transform.position.y) < MAX && ySpeed > 0) 
         {
             transform.Translate(Vector2.up * upSpeed * ySpeed, Space.World);
         }
@@ -53,6 +53,9 @@ public class PlayerController : MonoBehaviour
     {
         Backing = status;
     }
-
+    public void setCanUp(bool can)
+    {
+        canUp = can;
+    }
 
 }
