@@ -5,15 +5,17 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public Text timer;
+    public Text timer,timeOver;
     public float timerPerLevel = 60;
     private float crono, temporalTime;
     private bool runTime = true;
+    public DeadBola bola;
 
 
     private void Awake()
     {
         temporalTime = timerPerLevel;
+        timeOver.enabled = false;
     }
 
     void Update()
@@ -22,6 +24,19 @@ public class Timer : MonoBehaviour
         {
             timerPerLevel -= Time.deltaTime;
             timer.text = "" + timerPerLevel.ToString("f0");
+        }
+        else
+        {
+            timerPerLevel = 0;
+        }
+
+        if (timerPerLevel < 0) 
+        {
+            timerPerLevel = 0;
+            runTime = false;
+            bola.GameOver();
+            timeOver.enabled = true;
+            StartCoroutine(WaitForTimeOver());
         }
     }
 
@@ -43,6 +58,18 @@ public class Timer : MonoBehaviour
         return Mathf.Floor(temporalTime - timerPerLevel);
     }
 
+    /// <summary>
+    /// Reinicia el crono
+    /// </summary>
+    public void StartTimer()
+    {
+        runTime = true;
+        timerPerLevel = temporalTime;
+    }
 
-
+    private IEnumerator WaitForTimeOver()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        timeOver.enabled = false;
+    }
 }

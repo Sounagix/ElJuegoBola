@@ -6,6 +6,7 @@ public class DeadBola : MonoBehaviour
 {
     private GameObject player;
     public Transform[] spawnPoints;
+    public Timer timer;
 
     private void Start()
     {
@@ -24,13 +25,17 @@ public class DeadBola : MonoBehaviour
     /// </summary>
     public void StartBola()
     {
+        timer.StartTimer();
         BullEyeManager go = GameObject.Find("BullEyeManager").GetComponent<BullEyeManager>();
         go.SetAllCollidersEyeBull(false);
-        
         GetComponent<StartBola>().ServingBola();
         transform.position = spawnPoints[(int)(Random.Range(0, spawnPoints.Length))].position;
     }
 
-
+    public void GameOver()
+    {
+        RespawnBola();
+        StartBola();
+    }
 
 }
