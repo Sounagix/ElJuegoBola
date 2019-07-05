@@ -5,11 +5,15 @@ using UnityEngine;
 public class BallEye : MonoBehaviour
 {
     private bool available;//Determina si la diana es un target 
-    public bool active { get; private set; }//Determina si está visible
     private SpriteRenderer sp;
+    private void Awake()
+    {
+        sp = GetComponent<SpriteRenderer>();
+    }
+
     private void Start()
     {
-        sp = GetComponentInChildren<SpriteRenderer>();
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -30,14 +34,19 @@ public class BallEye : MonoBehaviour
             }
         }
     }
-    public void SetActive(bool status)
-    {
-        active = status;
-    }
+
+
+    /// <summary>
+    /// Pone como avariable (target) a un eyebull
+    /// </summary>
     public void SetAvailable()
     {
         available = true;
-        print(gameObject.name);
+    }
+
+    public void SetGreen()
+    {
         sp.color = Color.green;
     }
+
 }

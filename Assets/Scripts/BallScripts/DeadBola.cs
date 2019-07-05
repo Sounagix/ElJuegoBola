@@ -4,14 +4,13 @@ using UnityEngine;
 
 public class DeadBola : MonoBehaviour
 {
-    public Transform spawnPoint;
     private GameObject player;
+    public Transform[] spawnPoints;
 
     private void Start()
     {
         player = GameObject.Find("Player");
     }
-
     
     public void RespawnBola()
     {
@@ -20,9 +19,18 @@ public class DeadBola : MonoBehaviour
         GetComponent<Rigidbody2D>().Sleep();
     }
 
+    /// <summary>
+    /// Eligue un spawn point aleatorio
+    /// </summary>
     public void StartBola()
     {
-        transform.position = spawnPoint.position;
+        BullEyeManager go = GameObject.Find("BullEyeManager").GetComponent<BullEyeManager>();
+        go.SetAllCollidersEyeBull(false);
+        
+        GetComponent<StartBola>().ServingBola();
+        transform.position = spawnPoints[(int)(Random.Range(0, spawnPoints.Length))].position;
     }
+
+
 
 }

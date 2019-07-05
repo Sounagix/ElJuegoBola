@@ -40,7 +40,9 @@ public class BullEyeManager : MonoBehaviour
     }
 
 
-
+    /// <summary>
+    /// Activa aleatoriamente entre todos los los eyebull y los activa.
+    /// </summary>
     private void RandomActivate()
     {
         EyeBullActivate = new GameObject[randomBolas];
@@ -58,9 +60,44 @@ public class BullEyeManager : MonoBehaviour
             EyeBullActivate[i].SetActive(true);
         }
     }
+    /// <summary>
+    /// Elige un target de entre los "avariables" y selecciona uno como target.
+    /// </summary>
     public void ChoiceTarget()
     {
-        EyeBullActivate[Random.Range(0, EyeBullActivate.Length)].GetComponent<BallEye>().SetAvailable();
+        int rnd = Random.Range(0, EyeBullActivate.Length);
+        EyeBullActivate[rnd].GetComponent<BallEye>().SetAvailable();
+        EyeBullActivate[rnd].GetComponent<BallEye>().SetGreen();
+
     }
 
+    /// <summary>
+    /// Descactiva todos las dianas que estan activas
+    /// </summary>
+    public void DesactiveAllEyeBull()
+    {
+        for (int i = 0; i<EyeBullActivate.Length;i++)
+        {
+            EyeBullActivate[i].SetActive(false);
+        }
+    }
+
+    /// <summary>
+    /// Desactiva los colliders de los eyebulls
+    /// </summary>
+    /// <param name="status"></param>
+    public void SetAllCollidersEyeBull(bool status)
+    {
+        for (int i = 0; i < EyeBullActivate.Length; i++)
+        {
+            EyeBullActivate[i].GetComponent<CircleCollider2D>().enabled = status;
+        }
+    }
+
+    public void NewTargets()
+    {
+        DesactiveAllEyeBull();
+        RandomActivate();
+        ChoiceTarget();
+    }
 }
