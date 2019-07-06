@@ -6,16 +6,19 @@ using UnityEngine.UI;
 public class Timer : MonoBehaviour
 {
     public Text timer,timeOver;
-    public float timerPerLevel = 60;
-    private float crono, temporalTime;
-    private bool runTime = true;
-    public DeadBola bola;
+    private float crono, temporalTime, timerPerLevel;
+    private bool runTime = true, finalLap;
+    public DeadManager deadManager;
+    public AudioClip backCount, timeUp;
+    private SoundEffect soundEffect;
 
 
     private void Awake()
     {
+        timerPerLevel = GameManager.instancia.ReturnTimeForThisLevel();
         temporalTime = timerPerLevel;
         timeOver.enabled = false;
+        soundEffect = GetComponentInParent<SoundEffect>();
     }
 
     void Update()
@@ -34,9 +37,19 @@ public class Timer : MonoBehaviour
         {
             timerPerLevel = 0;
             runTime = false;
-            bola.GameOver();
+            deadManager.PlayerLose();
             timeOver.enabled = true;
+            soundEffect.StopBlucle();
+            soundEffect.PlayThatAudio(timeUp);
             StartCoroutine(WaitForTimeOver());
+        }
+
+        if (!finalLap && timerPerLevel <= 10)
+        {
+            finalLap = true;
+            soundEffect.PlayThatAudioInBucle(backCount);
+            timer.color = Color.red;
+            timer.fontSize = 30;
         }
     }
 
@@ -64,12 +77,20 @@ public class Timer : MonoBehaviour
     public void StartTimer()
     {
         runTime = true;
+        finalLap = false;
+        soundEffect.StopBlucle();
         timerPerLevel = temporalTime;
     }
 
+    /// <summary>
+    /// Espera un segundo para devolver al estado original.
+    /// </summary>
+    /// <returns></returns>
     private IEnumerator WaitForTimeOver()
     {
         yield return new WaitForSecondsRealtime(1);
         timeOver.enabled = false;
+        timer.fontSize = 20;
+        timer.color = Color.yellow;
     }
 }

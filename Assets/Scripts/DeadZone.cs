@@ -8,7 +8,7 @@ public class DeadZone : MonoBehaviour
     {
         if (collision.CompareTag("Bola"))
         {
-            collision.GetComponent<DeadBola>().RespawnBola();
+            DeadManager.instancia.PlayerLose();
         }
     }
 

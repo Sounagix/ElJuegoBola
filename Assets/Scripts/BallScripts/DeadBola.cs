@@ -4,39 +4,13 @@ using UnityEngine;
 
 public class DeadBola : MonoBehaviour
 {
-    private GameObject player;
-    public Transform[] spawnPoints;
-    public Timer timer;
+    //public DeadManager deadManager;
 
-    private void Start()
+    /*public void DyngBola()
     {
-        player = GameObject.Find("Player");
-    }
-    
-    public void RespawnBola()
-    {
-        player.GetComponent<PlayerController>().BackingPlayer(true);
-        player.GetComponent<Backing>().ActiveBacking();
-        GetComponent<Rigidbody2D>().Sleep();
-    }
+        deadManager.ServeBolaOnStart();
+    }*/
 
-    /// <summary>
-    /// Elige un spawn point aleatorio
-    /// </summary>
-    public void StartBola()
-    {
-        timer.StartTimer();
-        BullEyeManager go = GameObject.Find("BullEyeManager").GetComponent<BullEyeManager>();
-        go.SetAllCollidersEyeBull(false);
-        GetComponent<StartBola>().ServingBola();
-        transform.position = spawnPoints[(int)(Random.Range(0, spawnPoints.Length))].position;
-        player.GetComponent<PlayerController>().setCanUp(false);
-    }
 
-    public void GameOver()
-    {
-        RespawnBola();
-        StartBola();
-    }
 
 }

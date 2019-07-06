@@ -11,11 +11,6 @@ public class BallEye : MonoBehaviour
         sp = GetComponent<SpriteRenderer>();
     }
 
-    private void Start()
-    {
-
-    }
-
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Bola"))
@@ -23,14 +18,26 @@ public class BallEye : MonoBehaviour
             //desaparrecer la bola
             if(available)
             {
-                sp.color = Color.white;
                 available = false;
-                GetComponentInParent<BullEyeManager>().ChoiceTarget();
+                sp.color = Color.white;
+                if (GameManager.instancia.AddPoints())//true si ganas
+                {
+                    GameManager.instancia.Nextphase();
+                    Camera.main.GetComponent<HeadPhones>().playWinPhase();
+                    // hacer todo lo necesario para subir al siguiente nivel
+                }
+                else//Para el siguiente target
+                {
+                    GetComponentInParent<BullEyeManager>().ChoiceTarget();
+
+                }
+
             }
             else
             {
                 sp.color = Color.red;
-                other.GetComponent<DeadBola>().RespawnBola();
+                DeadManager.instancia.PlayerLose();
+                StartCoroutine(WaitForWrongTouch());
             }
         }
     }
@@ -47,6 +54,12 @@ public class BallEye : MonoBehaviour
     public void SetGreen()
     {
         sp.color = Color.green;
+    }
+
+    private IEnumerator WaitForWrongTouch()
+    {
+        yield return new WaitForSecondsRealtime(1);
+        sp.color = Color.white;
     }
 
 }

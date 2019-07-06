@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BullEyeManager : MonoBehaviour
 {
-    public int randomBolas;
+    private int randomBolas;
     public GameObject eyeBull;
     private float ancho, alto;
     public GameObject[] EyeBullActivate;
@@ -45,6 +45,7 @@ public class BullEyeManager : MonoBehaviour
     /// </summary>
     private void RandomActivate()
     {
+        randomBolas = GameManager.instancia.HowManyEyesBullPerLevel();
         EyeBullActivate = new GameObject[randomBolas];
         for(int i = 0;i < randomBolas;i++)
         {
