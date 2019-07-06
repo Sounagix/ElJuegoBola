@@ -43,3 +43,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BullEye
+    uniqueID: 2592168645
+    locked: 0
+  - name: Ball
+    uniqueID: 3867603203
+    locked: 0
+  - name: Player
+    uniqueID: 3033667019
+    locked: 0
