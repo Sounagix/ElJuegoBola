@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Bola
   - Center
+  - ShooterR
+  - ShooterL
+  - CloserR
+  - CloserL
   layers:
   - Default
   - TransparentFX

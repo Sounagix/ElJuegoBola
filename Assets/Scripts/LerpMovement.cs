@@ -7,7 +7,7 @@ public class LerpMovement : MonoBehaviour
     private Vector2 oriPos, goalPos;
     public float lerpSpeed;
     private float lerpTime;
-    private bool makeLerp;
+    public bool makeLerp;
 
 
     void Update()

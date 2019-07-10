@@ -23,12 +23,15 @@ public class DeadManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
-
+    /// <summary>
+    /// Informa  a la barra de que puede retroceder a su posición inicial.
+    /// Se queda en espera hasta que la barra haya bajado.
+    /// </summary>
     public void PlayerLose()
     {
         player.GetComponent<PlayerController>().BackingPlayer(true);
-        player.GetComponent<Backing>().ActiveBacking();
-        ServeBolaOnStart();
+        Backing backing = player.GetComponent<Backing>();
+        backing.ActiveBacking();
     }
 
     public void ServeBolaOnStart()

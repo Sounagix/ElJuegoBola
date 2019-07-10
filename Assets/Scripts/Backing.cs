@@ -15,7 +15,10 @@ public class Backing : MonoBehaviour
         posOrigen = transform.position;
     }
 
-
+    /// <summary>
+    /// Espera a que la barra baje a su posición inicial y
+    /// sirve la bola.
+    /// </summary>
     void Update()
     {
 
@@ -23,7 +26,6 @@ public class Backing : MonoBehaviour
         {
             timeToBack += backingSpeed * Time.deltaTime;
         }
-
         //Cuando llega la barra a su destino
         if (backing && transform.position.y <= 1)
         {
@@ -31,21 +33,23 @@ public class Backing : MonoBehaviour
             timeToBack = 0;
             GetComponent<PlayerController>().BackingPlayer(false);
             DeadManager.instancia.ServeBolaOnStart();
-            //deadManager.ServeBolaOnStart();
+            
         }
-
     }
-
     private void FixedUpdate()
     {
         if (backing)
             transform.position = Vector2.Lerp(posGoal, posOrigen, timeToBack);
 
     }
-
     public void ActiveBacking()
     {
         backing = true;
         posGoal = transform.position;
+        gameObject.GetComponent<PlayerController>().setCanUp(false);
+    }
+    public bool getBacking()
+    {
+        return backing;
     }
 }

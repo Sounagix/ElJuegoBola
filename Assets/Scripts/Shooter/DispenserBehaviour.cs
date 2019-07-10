@@ -20,8 +20,9 @@ public class DispenserBehaviour : MonoBehaviour
         {
             SetActiveClosers(false);
             collision.GetComponent<LerpMovement>().StopLerp();
-            collision.gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2((float)currDir, 0) * dispencerForce, ForceMode2D.Impulse);
-
+            Rigidbody2D ballsBody= collision.gameObject.GetComponent<Rigidbody2D>();
+            ballsBody.AddForce(new Vector2((float)currDir, 0) * dispencerForce, ForceMode2D.Impulse);
+            GameObject.Find("Player").GetComponent<PlayerController>().setCanUp(true);
         }
     }
 
